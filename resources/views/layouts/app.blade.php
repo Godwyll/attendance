@@ -121,7 +121,7 @@
           <ul>
             <li class="dropdown">
               <a href="javascript:void(0)" class="dropdown-toggle usertitle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <small>Administrator</small>
+                <small>User</small>
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu animated flipInY">
@@ -153,21 +153,28 @@
         </li>
 
         <li>
-          <a href="{{ route('/') }}">
+          <a href="{{ route('entries.create') }}">
             <i class="menu-icon zmdi zmdi-check-circle zmdi-hc-lg"></i>
             <span class="menu-text">Attendance Records</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="{{ route('sessions.index') }}">
+            <i class="menu-icon zmdi zmdi-more-horiz zmdi-hc-lg"></i>
+            <span class="menu-text">Attendance Sessions</span>
           </a>
         </li>
         
         <li class="has-submenu">
           <a href="javascript:void(0)" class="submenu-toggle">
-            <i class="menu-icon zmdi zmdi-accounts zmdi-hc-lg"></i>
-            <span class="menu-text">Attendance Sessions</span>
+            <i class="menu-icon zmdi zmdi-settings zmdi-hc-lg"></i>
+            <span class="menu-text">Setup</span>
             <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
           </a>
           <ul class="submenu">
-            <li><a href="{{ route ('/') }}"><span class="menu-text">Logins</span></a></li>
-            <li><a href="route ('manage') "><span class="menu-text">Checked in</span></a></li>
+            <li><a href="{{ route ('/') }}"><span class="menu-text">Courses</span></a></li>
+            <li><a href="{{ route ('/') }} "><span class="menu-text">Venues</span></a></li>
           </ul>
         </li>
 
@@ -175,13 +182,6 @@
           <a href="{{ route('/') }}">
             <i class="menu-icon zmdi zmdi-print zmdi-hc-lg"></i>
             <span class="menu-text">Reports</span>
-          </a>
-        </li>
-
-        <li>
-          <a href="{{ route('/') }}">
-            <i class="menu-icon zmdi zmdi-settings zmdi-hc-lg"></i>
-            <span class="menu-text">Config</span>
           </a>
         </li>
 

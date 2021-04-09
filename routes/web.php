@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\SessionController;
+use App\Http\Controllers\EntryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,12 +25,19 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::post('/sessions/set', [SessionController::class, 'set'])->name('sessions.set');;
+Route::get('/sessions/{session}/delete', [SessionController::class, 'delete'])->name('sessions.delete');
+Route::resource('/sessions', SessionController::class);
+
+Route::get('/entries/{entry}/delete', [EntryController::class, 'delete'])->name('entries.delete');
+Route::resource('/entries', EntryController::class);
+
 /* Routes for Administrative Management */
 // Admins without Authentication
 Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
     //Login Routes
-    Route::get('/login',[App\Http\Controllers\Admin\Auth\LoginController::class, 'showLoginForm'])->name('login');
-    Route::post('/login',[App\Http\Controllers\Admin\Auth\LoginController::class, 'login'])->name('login.submit');;
+    Route::get('/login',[LoginController::class, 'showLoginForm'])->name('login');
+    Route::post('/login',[LoginController::class, 'login'])->name('login.submit');;
 });
 
 // Admins with Authentication

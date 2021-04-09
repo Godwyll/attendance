@@ -19,15 +19,15 @@
 //         $('.venobox').venobox();
 //     });  
     
-// Edit Config Modal
-$('#edit-config-modal').on('show.bs.modal', function (event) {
+// Edit Session Modal
+$('#edit-session-modal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
     var id = button.data('id'); // Extract info from data-* attributes
     var data = 'id=' + id;
 
     $.ajax({
         type: "GET",
-        url: "/manage/config/edit/"+id,
+        url: "/sessions/"+id+"/edit",
         data: data,
         cache: false,
         success: function (data) {
@@ -40,15 +40,15 @@ $('#edit-config-modal').on('show.bs.modal', function (event) {
     });
 });
 
-// Delete Config Modal
-$('#delete-config-modal').on('show.bs.modal', function (event) {
+// Delete Session Modal
+$('#delete-session-modal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
     var id = button.data('id'); // Extract info from data-* attributes
     var data = 'id=' + id;
 
     $.ajax({
         type: "GET",
-        url: "/manage/config/delete/"+id,
+        url: "/sessions/"+id+"/delete",
         data: data,
         cache: false,
         success: function (data) {
@@ -65,7 +65,7 @@ $('#delete-config-modal').on('show.bs.modal', function (event) {
 $(document).ready(function() {
   $.ajax({
       type: "GET",
-      url: "/manage/cards",
+      url: "/cards",
       cache: false,
       success: function (data) {
           console.log(data);
