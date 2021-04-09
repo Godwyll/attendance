@@ -1,73 +1,65 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Login | {{ config('app.name') }}</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+	<meta name="description" content="Admin, Dashboard, Bootstrap" />
+	<link rel="shortcut icon" sizes="196x196" href="{{ asset('img/favicon.ico') }}">
+	
+	<link rel="stylesheet" href="{{ asset('libs/bower/font-awesome/css/font-awesome.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('libs/bower/material-design-iconic-font/dist/css/material-design-iconic-font.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('libs/bower/animate.css/animate.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
+	<link rel="stylesheet" href="{{ asset('assets/css/core.css') }}">
+	<link rel="stylesheet" href="{{ asset('assets/css/misc-pages.css') }}">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,500,600,700,800,900,300">
+</head>
+<body class="simple-page">
+	{{-- <div id="back-to-home">
+		<a href="{{ route('/') }}" class="btn btn-outline btn-default"><i class="fa fa-home animated zoomIn"></i></a>
+	</div> --}}
+	<div class="simple-page-wrap">
+		<div class="simple-page-logo animated swing">
+			<a href="{{ route('/') }}">
+				{{-- <span><i class="fa fa-gg"></i></span> --}}
+				<span><img src="{{ asset('img/favicon.ico') }}" alt="" height="5"></span>
+				<div>{{ config('app.name') }}</div>
+			</a>
+		</div><!-- logo -->
+		<div class="simple-page-form animated flipInY" id="login-form">
+	<h4 class="form-title m-b-xl text-center">Login</h4>
+	<form method="POST" action="{{ route('login') }}">
+    @csrf
+		<div class="form-group">
+			<input  placeholder="Username" id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
+			@error('username')
+				<span class="invalid-feedback" role="alert">
+					<strong>{{ $message }}</strong>
+				</span>
+			@enderror
+		</div>
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
+		<div class="form-group">
+			<input class="form-control" placeholder="Password" name="password"  id="password" type="password">
+			@error('password')
+				<span class="invalid-feedback" role="alert">
+					<strong>{{ $message }}</strong>
+				</span>
+			@enderror      
+		</div>
 
-                        <div class="form-group row">
-                            <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('Username') }}</label>
+		<div class="form-group m-b-xl">
+			<div class="checkbox checkbox-warning">
+				<input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }} />
+				<label for="remember">Remember Me</label>
+			</div>
+		</div>
+		<input type="submit" class="btn btn-dark" value="LOG IN">
+	</form>
+</div><!-- #login-form -->
 
-                            <div class="col-md-6">
-                                <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
-
-                                @error('username')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection
+	</div><!-- .simple-page-wrap -->
+</body>
