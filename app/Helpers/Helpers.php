@@ -19,6 +19,36 @@ class Helpers
         return $fullname;
     }
 
+    public static function ago($time)
+    {
+        if (isset($time)) {
+            $time = strtotime($time);
+
+            $periods = array("second", "minute", "hour", "day", "week", "month", "year", "decade");
+            $lengths = array("60","60","24","7","4.35","12","10");
+         
+            $now = time();
+         
+                $difference     = $now - $time;
+                $tense         = "ago";
+         
+            for($j = 0; $difference >= $lengths[$j] && $j < count($lengths)-1; $j++) {
+                $difference /= $lengths[$j];
+            }
+         
+            $difference = round($difference);
+         
+            if($difference != 1) {
+                $periods[$j].= "s";
+            }
+         
+            return "$difference $periods[$j] ago ";
+        } else {
+            return NULL;
+        }
+        
+    }    
+
     // TimeAgo Function
     public static function timeAgo($oldTime){
         if(isset($oldTime)){
@@ -83,12 +113,19 @@ class Helpers
         }
     }
 
-    public static function logLogin($user_id, $ip_address){
-        $login = new App\Login;
-        $login->user_id = $user_id;
-        $login->ip_address = $ip_address;
-        return $login->save();
+    // Return if a Student Attendance entry exist for a Session
+    public static function entryExist($student_no, $session_id){
+        if(\App\Models\Entry::where('student_no', $student_no)->where('session_id', $session_id)->first()){
+            return true;
+        }
     }
+
+    // Function to return if a student is Freshman
+    public static function isStudent($student_no){
+        if(\App\Models\Student::where('student_no', $student_no)->first()){
+            return true;
+        }        
+    }    
 
     // Function to Truncate Text
     public static function truncate($text, $length){
@@ -114,88 +151,5 @@ class Helpers
         return $dateResult;
     }
 
-    // Function to Return Submission count per (n) days.
-    public static function countPerDays($days){
-        $feedbackCount = \App\Submission::where('created_at', '>=', Helpers::dateFromDays($days))->get();
-        return $feedbackCount;
-    }
-
-    // Function to Return Submission count per Week (n).
-    public static function countPerWeek($week){
-        
-        // $feedbackCount = \App\Submission::where('created_at', '>=', Helpers::dateFromDays($days))->get();
-        return $feedbackCount;
-    }
-
-    // Function to Return Submission count per a given date.
-    public static function countPerDate($date){
-        $feedbackCount = \App\Submission::where('created_at', 'like', $date.'%')->get();
-        return $feedbackCount;
-    }
-
-    // Function to Return Submission count per a given date.
-    public static function userTypePerDate($userType, $date){
-        $feedbackCount = \App\Submission::where('user_type', $userType)->where('created_at', 'like', $date.'%')->get();
-        return $feedbackCount;
-    }
-
-    // Function to return periodic Submission
-    public static function thisPeriod($period){
-        $feedbackCount = \App\Submission::where('created_at', strtotime($period));
-        return $feedbackCount;
-    }
-
-    // Function to return Submission Type
-    public static function getSubmissionType($id){        
-        if($id == 1){
-            $name = "Feedback";
-        }elseif($id == 2){
-            $name = "Idea";
-        }else{
-            $name = NULL;
-        }
-        return $name;
-    }
-
-    // Function to return Category by Content Id
-    public static function getCategory($contentId){
-        if($contentId != 0){
-            $category = \App\Category::find($contentId)->name;
-        }else{
-            $category = 'Other';
-        }
-        return $category;
-    }
-
-    // Function to return colour code for Tagged Item
-    public static function getStatus($submissionId){
-        if($submission  = \App\SubmissionAction::where('submission_id', $submissionId)->first()){
-            $action = \App\Action::find('$submission->action_id');
-            return $action->action;
-        }
-        return "Pending";
-    }
-
-    // Function to return colour code for Tagged Item
-    public static function statusColor($submissionId){
-        if($submission  = \App\SubmissionAction::where('submission_id', $submissionId)->first()){
-            switch($submission->action_id){
-                case 1: 
-                    $color = "blue";
-                    break;
-                case 2: 
-                    $color = "orange";
-                    break;
-                case 3: 
-                    $color = "red";
-                    break;
-                default: 
-                    $color = "green";
-                    break;
-            }
-            return $color;
-        }
-        return NULL;
-    }
 
 }

@@ -4,6 +4,7 @@
 <section class="app-content">
     @php
         $i=1;
+        $entries = \App\Models\Entry::limit(100)->get();
         // $distinctBookings = \App\Booking::selectRaw('DISTINCT student_no, appointment_date')->where('appointment_date', date('Y-m-d'))->get();
         // $checkIns = \App\Booking::selectRaw('DISTINCT student_no, appointment_date')->where('appointment_date', date('Y-m-d'))->where('status', '>=', 1)->get();
         // $checkOuts = \App\Booking::selectRaw('DISTINCT student_no, appointment_date')->where('appointment_date', date('Y-m-d'))->where('status', 2)->get();
@@ -110,28 +111,21 @@
                                                     <tr>
                                                         <th>#</th>
                                                         <th>Student No.</th>
-                                                        <th>Student Name</th>
-                                                        <th>Token</th>
-                                                        <th>Appointment Date</th>
+                                                        <th>Attendance Session</th>
                                                         <th>Timestamp</th>
                                                         <th>Options</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {{-- @foreach ($distinctBookings as $distinctBooking)
-                                                        @php
-                                                            $booking = \App\Booking::where('student_no', $distinctBooking->student_no)->where('appointment_date', $distinctBooking->appointment_date)->first();
-                                                        @endphp
+                                                    @foreach ($entries as $entry)
                                                         <tr>
                                                             <td>{{ $i++ }}</td>
-                                                            <td>{{ @$booking->student_no }}</td>
-                                                            <td>{{ @$booking->student_name }}</td>
-                                                            <td>{{ @$booking->token }}</td>
-                                                            <td>{{ Helpers::coolDate(@$booking->appointment_date) }}</td>
-                                                            <td>{{ @$booking->created_at }}</td>
+                                                            <td>{{ $entry->student_no }}</td>
+                                                            <td>{{ $entry->session_id }}</td>
+                                                            <td>{{ Helpers::coolDate($entry->created_at) }}</td>
                                                             <td></td>
                                                         </tr>                                       
-                                                    @endforeach --}}
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                         </div>

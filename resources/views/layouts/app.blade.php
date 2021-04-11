@@ -9,7 +9,7 @@
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	  	
 	<link rel="shortcut icon" sizes="196x196" href="{{ asset('img/favicon.ico') }}">
-	<title>{{ @@$title }} | {{ config('app.name') }}</title>
+	<title>{{ @$title }} | {{ config('app.name') }}</title>
 	
 	<link rel="stylesheet" href="{{ asset('libs/bower/font-awesome/css/font-awesome.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('libs/bower/material-design-iconic-font/dist/css/material-design-iconic-font.css') }}">
@@ -151,18 +151,23 @@
             <span class="menu-text">Dashboard</span>
           </a>
         </li>
-
-        <li>
-          <a href="{{ route('entries.create') }}">
+        
+        <li class="has-submenu">
+          <a href="javascript:void(0)" class="submenu-toggle">
             <i class="menu-icon zmdi zmdi-check-circle zmdi-hc-lg"></i>
-            <span class="menu-text">Attendance Records</span>
+            <span class="menu-text">Attendance</span>
+            <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
           </a>
+          <ul class="submenu">
+            <li><a href="{{ route ('entries.create') }}"><span class="menu-text">New Attendance Entry</span></a></li>
+            <li><a href="{{ route ('entries.index') }} "><span class="menu-text">Attendance List</span></a></li>
+          </ul>
         </li>
 
         <li>
           <a href="{{ route('sessions.index') }}">
             <i class="menu-icon zmdi zmdi-more-horiz zmdi-hc-lg"></i>
-            <span class="menu-text">Attendance Sessions</span>
+            <span class="menu-text">Sessions</span>
           </a>
         </li>
         

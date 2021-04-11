@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Entry;
 use Auth;
-use Session;
+use Helpers;
 
 class EntryController extends Controller
 {
@@ -48,13 +48,26 @@ class EntryController extends Controller
         $entry->student_no = $request->input('student_no');
         $entry->user_id =  Auth::user()->id;
 
-        if($entry->save()){
-            Session::flash('success', 'Student Checked in Successfully.');
-            return redirect()->back();
-        }else{
-            Session::flash('warning', 'Sorry, something went wrong.');
-            return redirect()->back();
+        if (session('session_id')) {
+            if(!Helpers::entryExist($entry->student_no, $entry->session_id)){
+                
+                if($entry->save()){
+                    // Session::flash('success', 'Student Checked in Successfully.');
+                    // return redirect()->back();
+                    return view('entries.partial')->with('student_no', $entry->student_no);
+                }else{
+                    // Session::flash('warning', 'Sorry, something went wrong.');
+                    // return redirect()->back();
+                    return "<div class='alert alert-danger alert-custom alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><h4 class='alert-title'>Oops!</h4> <p>Something went wrong. Please contact administrator.</p></div>";
+                }
+            }else{
+                return "<div class='alert alert-danger alert-custom alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><h4 class='alert-title'>Heads-up!</h4> <p> Student has been already recorded within the same Attendance Session.</p></div>";
+            }
+        } else {
+            return "<div class='alert alert-danger alert-custom alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><h4 class='alert-title'>Heads-up!</h4> <p> Kindly set an Attendance Session before you can proceed.</p></div>";
         }
+        
+
 
     }
 

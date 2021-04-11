@@ -25,12 +25,18 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::post('/sessions/set', [SessionController::class, 'set'])->name('sessions.set');;
-Route::get('/sessions/{session}/delete', [SessionController::class, 'delete'])->name('sessions.delete');
-Route::resource('/sessions', SessionController::class);
+Route::group(['middleware' => 'auth'], function(){
+    
+    Route::post('/sessions/set', [SessionController::class, 'set'])->name('sessions.set');;
+    Route::get('/sessions/{session}/delete', [SessionController::class, 'delete'])->name('sessions.delete');
+    Route::resource('/sessions', SessionController::class);
+    
+    Route::get('/entries/{entry}/delete', [EntryController::class, 'delete'])->name('entries.delete');
+    Route::resource('/entries', EntryController::class);
+    
+});
 
-Route::get('/entries/{entry}/delete', [EntryController::class, 'delete'])->name('entries.delete');
-Route::resource('/entries', EntryController::class);
+
 
 /* Routes for Administrative Management */
 // Admins without Authentication

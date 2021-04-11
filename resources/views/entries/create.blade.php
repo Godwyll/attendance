@@ -71,23 +71,83 @@
                     </div> --}}
                         <div class="promo">
                             <div class="promo-body">
-                                <form id="attendance-form" method="POST" action="{{ route('entries.store') }}">
+                                <form id="attendance-form">
                                     @csrf
                                     <div class="row">
                                         <div class="col-xs-12 col-sm-8 col-sm-offset-1">
                                             <div class="form-group">
-                                                <input name="student_no" id="student_no" type="search" class="form-control promo-search-field"
-                                                    placeholder="Please Scan Student ID Card with the Barcode Scanner">
+                                                <input name="student_no" id="student_no" type="number"
+                                                    class="form-control promo-search-field"
+                                                    placeholder="Please scan Student ID card with Barcode Scanner" required
+                                                    autofocus>
                                             </div>
                                         </div>
                                         <div class="col-xs-12 col-sm-2">
-                                            <input type="submit" class="btn btn-primary btn-block promo-search-submit"
-                                                value="Go">
+                                            <input type="submit" class="btn btn-warning promo-search-submit" value="Go">
                                         </div>
                                     </div>
                                 </form>
+
+                                <hr class="widget-separator">
+
+                                <div class="col-offset-2">
+                                    <div id="message-box">
+                                        @php
+                                            $i = 1;
+                                            $entries = \App\Models\Entry::orderBy('created_at', 'desc')
+                                                ->limit(10)
+                                                ->get();
+                                        @endphp
+
+                                        @if (count($entries) > 0)
+                                        <div class="widget">
+                                            <header class="widget-header">
+                                                <h4 class="widget-title">Last 10 Entries
+                                                </h4>
+                                            </header><!-- .widget-header -->
+                                            <hr class="widget-separator">
+                                            <div class="widget-body">
+                                                <div class="table-responsive">
+                                                    <table id="default-datatable" data-plugin="DataTable" class="table table-striped" cellspacing="0" width="100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Student No.</th>
+                                                                <th>Attendance Session</th>
+                                                                <th>Timestamp</th>
+                                                                <th>Options</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($entries as $entry)
+                                                                <tr>
+                                                                    <td>{{ $i++ }}</td>
+                                                                    <td>{{ $entry->student_no }}</td>
+                                                                    <td>{{ $entry->session_id }}</td>
+                                                                    <td>{{ Helpers::ago($entry->created_at) }}</td>
+                                                                    <td></td>
+                                                                </tr>                                       
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div><!-- .widget-body -->
+                                        </div><!-- .widget -->                                        @endif
+
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
+                        {{-- <div class="pace pace-active">
+                            <div class="pace-progress" data-progress-text="100%" data-progress="99"
+                                style="transform: translate3d(100%, 0px, 0px);">
+                                <div class="pace-progress-inner"></div>
+                            </div>
+                            <div class="pace-activity"></div>
+                        </div> --}}
+
                     </div><!-- .widget-body -->
                 </div><!-- .widget -->
             </div><!-- END column -->
