@@ -18,8 +18,11 @@ class CreateTimetablesTable extends Migration
             $table->string('course_code');
             $table->string('course_name');
             $table->string('class');
-            $table->integer('total_students');
-            $table->string('room');
+            $table->integer('total_students')->nullable();
+            $table->string('room')->nullable();
+            $table->date('date');
+            $table->time('start_time')->nullable();
+            $table->time('end_time')->nullable();
             $table->timestamps();
         });
     }

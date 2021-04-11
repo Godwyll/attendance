@@ -4,7 +4,9 @@
     <section class="app-content">
         @php
             $i = 1;
-            $sessions = \App\Models\Session::all();
+            $timetableEntries = \App\Models\Timetable::where('date', '>=', date('Y-m-d', strtotime(date('Y-m-d') . '-1 day')))
+                ->where('date', '<=', date('Y-m-d', strtotime(date('Y-m-d') . '+2 days')))
+                ->get();
             // $distinctBookings = \App\Booking::selectRaw('DISTINCT student_no, appointment_date')->where('appointment_date', date('Y-m-d'))->get();
             // $checkIns = \App\Booking::selectRaw('DISTINCT student_no, appointment_date')->where('appointment_date', date('Y-m-d'))->where('status', '>=', 1)->get();
             // $checkOuts = \App\Booking::selectRaw('DISTINCT student_no, appointment_date')->where('appointment_date', date('Y-m-d'))->where('status', 2)->get();
@@ -20,35 +22,29 @@
                             ATTENDANCE SESSION
                             @if (session('session_id'))
                                 @php
-                                    $activeSession = \App\Models\Session::find(session('session_id'));
-                                    // $activeSession = DB::table('sessions')
-                                    //     ->rightJoin('timetables', 'sessions.timetable_id', '=', 'timetables.id')
-                                    //     ->get();
-                                    // print_r($activeSession[0]);
+                                    $activeSession = \App\Models\Timetable::find(session('session_id'));
                                 @endphp
-                                {{-- <strong>({{ $activeSession->name }})</strong> --}}
-                                <strong>({{ session('session_id') }})</strong>
-                                {{-- <strong>( {{ $activeSession[0]->name }} {{ $activeSession[0]->course_code }} {{ $activeSession[0]->course_name }} )</strong> --}}
+                                <strong>{{ $activeSession->course_code }} - {{ $activeSession->course_name }}
+                                    [{{ $activeSession->class }}] ({{ Helpers::coolTime($activeSession->start_time) }} -
+                                    {{ Helpers::coolTime($activeSession->end_time) }})</strong>
                             @endif
                         </h4>
                         <span class="pull-right">
                             <form action="{{ route('sessions.set') }}" method="post">
                                 @csrf
-                                <strong>Set Session: </strong>&nbsp;
-                                <select name="session_id" id="session">
+                                <strong class="text-warning">Set Session: </strong>&nbsp;
+                                <select name="session_id" id="session" required>
                                     <option value="">- Select -</option>
-                                    @foreach ($sessions as $session)
-                                        @php
-                                            $timetableEntry = \App\Models\Timetable::find($session->timetable_id);
-                                        @endphp
-                                        <option value="{{ $session->id }}">{{ $timetableEntry->course_code }}
+                                    @foreach ($timetableEntries as $timetableEntry)
+                                        <option value="{{ $timetableEntry->id }}">{{ $timetableEntry->course_code }}
                                             {{ $timetableEntry->course_name }} - {{ $timetableEntry->class }} -
-                                            {{ $timetableEntry->room }} ({{ $session->name }}
-                                            {{ Helpers::coolTime($session->start_time) }} -
-                                            {{ Helpers::coolTime($session->end_time) }})</option>
+                                            {{ $timetableEntry->room }} ({{ $timetableEntry->name }}
+                                            ({{ Helpers::coolDate($timetableEntry->date) }}
+                                            {{ Helpers::coolTime($timetableEntry->start_time) }} -
+                                            {{ Helpers::coolTime($timetableEntry->end_time) }})</option>
                                     @endforeach
                                 </select>
-                                <button type="submit" class="btn btn-xs btn-dark">Go</button>
+                                <button type="submit" class="btn btn-xs btn-warning">Go</button>
                             </form>
                         </span>
 
@@ -100,39 +96,54 @@
                                         @endphp
 
                                         @if (count($entries) > 0)
-                                        <div class="widget">
-                                            <header class="widget-header">
-                                                <h4 class="widget-title">Last 10 Entries
-                                                </h4>
-                                            </header><!-- .widget-header -->
-                                            <hr class="widget-separator">
-                                            <div class="widget-body">
-                                                <div class="table-responsive">
-                                                    <table id="default-datatable" data-plugin="DataTable" class="table table-striped" cellspacing="0" width="100%">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>#</th>
-                                                                <th>Student No.</th>
-                                                                <th>Attendance Session</th>
-                                                                <th>Timestamp</th>
-                                                                <th>Options</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            @foreach ($entries as $entry)
+                                            <div class="widget">
+                                                <header class="widget-header">
+                                                    <h4 class="widget-title">Last 10 Entries
+                                                    </h4>
+                                                </header><!-- .widget-header -->
+                                                <hr class="widget-separator">
+                                                <div class="widget-body">
+                                                    <div class="table-responsive">
+                                                        <table id="default-datatable" data-plugin="DataTable"
+                                                            class="table table-striped" cellspacing="0" width="100%">
+                                                            <thead>
                                                                 <tr>
-                                                                    <td>{{ $i++ }}</td>
-                                                                    <td>{{ $entry->student_no }}</td>
-                                                                    <td>{{ $entry->session_id }}</td>
-                                                                    <td>{{ Helpers::ago($entry->created_at) }}</td>
-                                                                    <td></td>
-                                                                </tr>                                       
-                                                            @endforeach
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div><!-- .widget-body -->
-                                        </div><!-- .widget -->                                        @endif
+                                                                    <th>#</th>
+                                                                    <th>Student No.</th>
+                                                                    <th>Student Name</th>
+                                                                    <th>Session</th>
+                                                                    <th>Timestamp</th>
+                                                                    <th>Options</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach ($entries as $entry)
+                                                                    @php
+                                                                        $timetable = \App\Models\Timetable::find($entry->session_id);
+                                                                        $student = \App\Models\Student::where('student_no', $entry->student_no)->first();
+                                                                    @endphp
+                                                                    <tr>
+                                                                        <td>{{ $i++ }}</td>
+                                                                        <td>{{ $entry->student_no }}</td>
+                                                                        <td>{{ @$student->surname }}
+                                                                            {{ @$student->othernames }}</td>
+                                                                        <td>{{ $timetable->course_code }} -
+                                                                            {{ $timetable->course_name }}
+                                                                            [{{ $timetable->class }}]
+                                                                            ({{ Helpers::coolTime($timetable->start_time) }}
+                                                                            -
+                                                                            {{ Helpers::coolTime($timetable->end_time) }})
+                                                                        </td>
+                                                                        <td>{{ Helpers::ago($entry->created_at) }}</td>
+                                                                        <td></td>
+                                                                    </tr>
+                                                                @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div><!-- .widget-body -->
+                                            </div><!-- .widget -->
+                                        @endif
 
 
                                     </div>

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\TimetableController;
 use App\Http\Controllers\EntryController;
 
 /*
@@ -30,6 +31,10 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('/sessions/set', [SessionController::class, 'set'])->name('sessions.set');;
     Route::get('/sessions/{session}/delete', [SessionController::class, 'delete'])->name('sessions.delete');
     Route::resource('/sessions', SessionController::class);
+    
+    Route::post('/timetables/set', [TimetableController::class, 'set'])->name('timetables.set');;
+    Route::get('/timetables/{timetable}/delete', [TimetableController::class, 'delete'])->name('timetables.delete');
+    Route::resource('/timetables', TimetableController::class);
     
     Route::get('/entries/{entry}/delete', [EntryController::class, 'delete'])->name('entries.delete');
     Route::resource('/entries', EntryController::class);

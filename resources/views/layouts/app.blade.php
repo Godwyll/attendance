@@ -163,24 +163,19 @@
             <li><a href="{{ route ('entries.index') }} "><span class="menu-text">Attendance List</span></a></li>
           </ul>
         </li>
+{{-- 
+        <li>
+          <a href="{{ route('timetables.index') }}">
+            <i class="menu-icon zmdi zmdi-more-horiz zmdi-hc-lg"></i>
+            <span class="menu-text">Timetable Entrys</span>
+          </a>
+        </li> --}}
 
         <li>
-          <a href="{{ route('sessions.index') }}">
+          <a href="{{ route('timetables.index') }}">
             <i class="menu-icon zmdi zmdi-more-horiz zmdi-hc-lg"></i>
-            <span class="menu-text">Sessions</span>
+            <span class="menu-text">Timetable</span>
           </a>
-        </li>
-        
-        <li class="has-submenu">
-          <a href="javascript:void(0)" class="submenu-toggle">
-            <i class="menu-icon zmdi zmdi-settings zmdi-hc-lg"></i>
-            <span class="menu-text">Setup</span>
-            <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
-          </a>
-          <ul class="submenu">
-            <li><a href="{{ route ('/') }}"><span class="menu-text">Courses</span></a></li>
-            <li><a href="{{ route ('/') }} "><span class="menu-text">Venues</span></a></li>
-          </ul>
         </li>
 
         <li>
