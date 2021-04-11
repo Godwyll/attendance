@@ -8,10 +8,6 @@
             $timetables = \App\Models\Timetable::all();
             $todaysEntries = \App\Models\Entry::where('created_at', Carbon\Carbon::today())->get();
             $todaysSessions = \App\Models\Timetable::where('created_at', Carbon\Carbon::today())->get();
-            // $distinctBookings = \App\Booking::selectRaw('DISTINCT student_no, appointment_date')->where('appointment_date', date('Y-m-d'))->get();
-            // $checkIns = \App\Booking::selectRaw('DISTINCT student_no, appointment_date')->where('appointment_date', date('Y-m-d'))->where('status', '>=', 1)->get();
-            // $checkOuts = \App\Booking::selectRaw('DISTINCT student_no, appointment_date')->where('appointment_date', date('Y-m-d'))->where('status', 2)->get();
-            // $outstandingBookings = \App\Booking::selectRaw('DISTINCT student_no, appointment_date')->where('appointment_date', date('Y-m-d'))->where('status', 0)->get();
         @endphp
 
         <div class="row" id="cards">
@@ -99,14 +95,14 @@
                                     <div class="widget">
                                         <header class="widget-header">
                                             <h4 class="widget-title">Today's Entries ({{ date('D, jS M Y') }})
-                                                <span class="pull-right">
+                                                {{-- <span class="pull-right">
                                                     <form action="{{ route('/') }}" method="post">
                                                         @csrf
                                                         <strong>Change Date: </strong>&nbsp;
                                                         <input type="date" name="date">
                                                         <button type="submit" class="btn btn-xs btn-dark">Go</button>
                                                     </form>
-                                                </span>
+                                                </span> --}}
                                             </h4>
                                         </header><!-- .widget-header -->
                                         <hr class="widget-separator">

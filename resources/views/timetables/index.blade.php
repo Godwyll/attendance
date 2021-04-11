@@ -9,7 +9,7 @@
             <div class="widget">
                 <header class="widget-header">
                     <h4 class="widget-title">Timetable Entries
-                        <span class="pull-right btn btn-sm btn-warning" data-toggle="modal" data-target="#add-timetable-modal">CREATE ATTENDANCE TIMETABLE ENTRY</span>
+                        <span class="pull-right btn btn-sm btn-warning" data-toggle="modal" data-target="#add-timetable-modal">CREATE TIMETABLE ENTRY</span>
                     </h4>
 
                 </header><!-- .widget-header -->
@@ -24,28 +24,23 @@
                         <table id="default-datatable" data-plugin="DataTable" class="table table-striped" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
-                                    <th>#</th>                                    
-                                    <th>Name</th>
-                                    <th>Date</th>
-                                    <th>Duration</th>
-                                    <th>Timetable Entry</th>
-                                    <th>Timestamp</th>
+                                    <th>#</th>
+                                    <th>Session</th>                                   
+                                    <th>Course Info</th>
+                                    <th>Class/Venue</th>
+                                    <th>Date/Duration</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
 
                             <tbody>
                                 @foreach ($timetables as $timetable)
-                                    @php
-                                        $timetableEntry = \App\Models\Timetable::find($timetable->timetable_id);
-                                    @endphp
                                     <tr>
                                         <td>{{ $i++ }}</td>
-                                        <td>{{ $timetable->name }}</td>
-                                        <td>{{ Helpers::coolDate($timetable->date) }}</td>                                        
-                                        <td>{{ Helpers::coolTime($timetable->start_time) }} - {{ Helpers::coolTime($timetable->end_time) }}</td>
-                                        <td>{{ $timetableEntry->course_code}} - {{$timetableEntry->course_name}} <strong>({{$timetableEntry->class}})</strong></td>
-                                        <td>{{ Helpers::coolDate($timetable->created_at) }}</td>                                        
+                                        <td>{{ $timetable->id}}</td>
+                                        <td>{{ $timetable->course_code}} - {{$timetable->course_name}}</td>
+                                        <td>{{ $timetable->class }}/{{ $timetable->room }}</td>                                        
+                                        <td>{{ Helpers::coolDate($timetable->date) }} ({{ Helpers::coolTime($timetable->start_time) }} - {{ Helpers::coolTime($timetable->end_time) }})</td>
                                         <td>
                                             <button role="button" data-toggle="modal" data-target="#edit-timetable-modal" data-id="{{ $timetable->id }}" class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></button>
                                             <button role="button" data-toggle="modal" data-target="#delete-timetable-modal" data-id="{{ $timetable->id }}" class="btn btn-xs btn-dark"><i class="fa fa-trash-o"></i></button>
@@ -71,7 +66,7 @@
         <div class="panel panel-warning">
             <div class="panel-heading">
                 <h4 class="panel-title" id="add-timetable-label">
-                    NEW ATTENDANCE TIMETABLE ENTRY
+                    NEW TIMETABLE ENTRY
                     <span role="button" class="pull-right" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </span>                    
@@ -133,7 +128,7 @@
         <div class="panel panel-warning">
             <div class="panel-heading">
                 <h4 class="panel-title" id="edit-timetable-label">
-                    EDIT ATTENDANCE TIMETABLE ENTRY
+                    EDIT TIMETABLE ENTRY
                     <span role="button" class="pull-right" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </span>                    
@@ -150,7 +145,7 @@
         <div class="panel panel-dark">
             <div class="panel-heading">
                 <h4 class="panel-title" id="delete-timetable-label">
-                    DELETE ATTENDANCE TIMETABLE ENTRY
+                    DELETE TIMETABLE ENTRY
                     <span role="button" class="pull-right" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </span>                    

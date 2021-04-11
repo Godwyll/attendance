@@ -7,15 +7,11 @@
             $timetableEntries = \App\Models\Timetable::where('date', '>=', date('Y-m-d', strtotime(date('Y-m-d') . '-1 day')))
                 ->where('date', '<=', date('Y-m-d', strtotime(date('Y-m-d') . '+2 days')))
                 ->get();
-            // $distinctBookings = \App\Booking::selectRaw('DISTINCT student_no, appointment_date')->where('appointment_date', date('Y-m-d'))->get();
-            // $checkIns = \App\Booking::selectRaw('DISTINCT student_no, appointment_date')->where('appointment_date', date('Y-m-d'))->where('status', '>=', 1)->get();
-            // $checkOuts = \App\Booking::selectRaw('DISTINCT student_no, appointment_date')->where('appointment_date', date('Y-m-d'))->where('status', 2)->get();
-            // $outstandingBookings = \App\Booking::selectRaw('DISTINCT student_no, appointment_date')->where('appointment_date', date('Y-m-d'))->where('status', 0)->get();
         @endphp
 
 
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="widget">
                     <header class="widget-header">
                         <h4 class="widget-title">

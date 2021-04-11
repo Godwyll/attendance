@@ -127,6 +127,23 @@ class Helpers
         }        
     }    
 
+    // Function to return the session number of a Timetable Entry
+    public static function getSession($timetable_id){
+        if($timetable = \App\Models\Timetable::find($timetable_id)){
+            switch ($timetable) {
+                case 'value':
+                    # code...
+                    break;
+                
+                default:
+                    # code...
+                    break;
+            }
+            
+            return true;
+        }        
+    }    
+
     // Function to Truncate Text
     public static function truncate($text, $length){
         if(strlen($text)>$length){
