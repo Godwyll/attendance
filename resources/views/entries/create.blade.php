@@ -26,10 +26,10 @@
                             @endif
                         </h4>
                         <span class="pull-right">
-                            <form action="{{ route('sessions.set') }}" method="post">
+                            <form action="{{ route('session.set') }}" method="post">
                                 @csrf
                                 <strong class="text-warning">Set Session: </strong>&nbsp;
-                                <select name="session_id" id="session" required>
+                                <select name="timetable_id" id="session" required>
                                     <option value="">- Select -</option>
                                     @foreach ($timetableEntries as $timetableEntry)
                                         <option value="{{ $timetableEntry->id }}">{{ $timetableEntry->course_code }}

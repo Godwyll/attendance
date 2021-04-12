@@ -4,7 +4,7 @@ namespace App\Helpers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Facades;
-// use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\DB;
 
 class Helpers
 {
@@ -130,17 +130,25 @@ class Helpers
     // Function to return the session number of a Timetable Entry
     public static function getSession($timetable_id){
         if($timetable = \App\Models\Timetable::find($timetable_id)){
-            switch ($timetable) {
-                case 'value':
-                    # code...
+            switch ($timetable->start_time) {
+                case '08:30':
+                    $session = "1";
+                    break;
+                
+                case '12:15':
+                    $session = "2";
+                    break;
+                
+                case '16:00':
+                    $session = "3";
                     break;
                 
                 default:
-                    # code...
+                    $session = NULL;
                     break;
             }
             
-            return true;
+            return $session;
         }        
     }    
 

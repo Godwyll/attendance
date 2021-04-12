@@ -9,7 +9,7 @@
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	  	
 	<link rel="shortcut icon" sizes="196x196" href="{{ asset('img/favicon.ico') }}">
-	<title>{{ @$title }} | {{ config('app.name') }}</title>
+	<title>{{ @$title }} {{ isset($title) ? '|' : NULL }} {{ config('app.name') }}</title>
 	
 	<link rel="stylesheet" href="{{ asset('libs/bower/font-awesome/css/font-awesome.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('libs/bower/material-design-iconic-font/dist/css/material-design-iconic-font.css') }}">
@@ -54,7 +54,7 @@
 
     <a href="" class="navbar-brand">
       <span class="brand-icon col-black"><i class="fa fa-gg"></i></span>
-      <span class="brand-name col-black">ATMAN</span>
+      <span class="brand-name col-black">ATTMAN</span>
     </a>
   </div><!-- .navbar-header -->
   
@@ -159,17 +159,10 @@
             <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
           </a>
           <ul class="submenu">
-            <li><a href="{{ route ('entries.create') }}"><span class="menu-text">New Attendance Entry</span></a></li>
+            <li><a href="{{ route ('entries.create') }}"><span class="menu-text">New Entry</span></a></li>
             <li><a href="{{ route ('entries.index') }} "><span class="menu-text">Attendance List</span></a></li>
           </ul>
         </li>
-{{-- 
-        <li>
-          <a href="{{ route('timetables.index') }}">
-            <i class="menu-icon zmdi zmdi-more-horiz zmdi-hc-lg"></i>
-            <span class="menu-text">Timetable Entrys</span>
-          </a>
-        </li> --}}
 
         <li>
           <a href="{{ route('timetables.index') }}">

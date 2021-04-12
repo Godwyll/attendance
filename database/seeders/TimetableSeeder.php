@@ -20,6 +20,9 @@ class TimetableSeeder extends Seeder
             'class' => 'TS1-TEST1',
             'total_students' => '100',
             'room' => 'TST101',
+            'date' => '2021-04-12',
+            'start_time' => '08:30',
+            'end_time' => '10:30',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -30,6 +33,9 @@ class TimetableSeeder extends Seeder
             'class' => 'TS1-TEST2',
             'total_students' => '100',
             'room' => 'TST102',
+            'date' => '2021-04-12',
+            'start_time' => '12:15',
+            'end_time' => '14:25',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -40,6 +46,9 @@ class TimetableSeeder extends Seeder
             'class' => 'DM2-DMY1',
             'total_students' => '90',
             'room' => 'DMY101',
+            'date' => '2021-04-12',
+            'start_time' => '16:30',
+            'end_time' => '18:30',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -50,6 +59,9 @@ class TimetableSeeder extends Seeder
             'class' => 'DM2-DMY2',
             'total_students' => '90',
             'room' => 'DMY102',
+            'date' => '2021-04-12',
+            'start_time' => '18:30',
+            'end_time' => '20:30',
             'created_at' => now(),
             'updated_at' => now(),
         ]);

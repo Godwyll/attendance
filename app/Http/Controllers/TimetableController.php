@@ -30,7 +30,7 @@ class TimetableController extends Controller
             'timetable_id' => 'required',
         ]);
 
-        timetable(['timetable_id' => $request->input('timetable_id')]);
+        session(['session_id' => $request->input('timetable_id')]);
         return redirect()->back()->with('success', 'Timetable Set Successfully.');
     }
 
