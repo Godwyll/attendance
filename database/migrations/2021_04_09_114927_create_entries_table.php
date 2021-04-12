@@ -14,7 +14,7 @@ class CreateEntriesTable extends Migration
     public function up()
     {
         Schema::create('entries', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->integer('session_id');
             $table->integer('student_no');
             $table->integer('user_id');

@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Entry;
-use Auth;
 use Helpers;
+use Auth;
+use Str;
 
 class EntryController extends Controller
 {
@@ -44,6 +45,7 @@ class EntryController extends Controller
             'student_no' => 'required',
         ]);
 
+        $entry->id = Str::uuid();
         $entry->session_id = session('session_id');
         $entry->student_no = $request->input('student_no');
         $entry->user_id =  Auth::user()->id;

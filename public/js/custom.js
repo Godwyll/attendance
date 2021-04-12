@@ -21,7 +21,24 @@ $("#attendance-form").submit(function (e) {
     });
 });
 
-// });
+// Create Attendance Entry Form
+$("#set-session").submit(function (e) {
+    e.preventDefault();
+
+    $.ajax({
+        type: "POST",
+        url: "/session/set",
+        data: $("#set-session").serialize(),
+
+        beforeSend: function () {
+            $("#session-box").html("<div class='progress progress-lg'><div class='progress-bar progress-bar-striped active progress-bar-warning' role='progressbar' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100' style='width: 100%;'><span>Loading...</span></div></div>");
+        },
+
+        success: function (data) {
+            $("#session-box").html(data);
+        }
+    });
+});
 
 // Edit Session Modal
 $('#edit-session-modal').on('show.bs.modal', function (event) {

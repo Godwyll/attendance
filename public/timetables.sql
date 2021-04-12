@@ -1,28 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 5.0.2
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: Apr 11, 2021 at 09:54 PM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.6
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `attendance`
---
-
--- --------------------------------------------------------
-
 --
 -- Dumping data for table `timetables`
 --
@@ -354,8 +329,7 @@ INSERT INTO `timetables` (`id`, `course_code`, `course_name`, `class`, `total_st
 (324, 'MATH 251', 'Differential Equations', 'ED2-IND', 43, 'RM A', '2021-04-20', '12:15:00', '14:15:00', '2021-04-11 19:54:40', '2021-04-11 19:54:40'),
 (325, 'MATH 251', 'Differential Equations', 'ED2-CE', 188, 'VSLA/LT', '2021-04-20', '12:15:00', '14:15:00', '2021-04-11 19:54:40', '2021-04-11 19:54:40'),
 (326, 'MATH 251', 'Differential Equations', 'ED2-ME', 183, '304/303/206', '2021-04-20', '12:15:00', '14:15:00', '2021-04-11 19:54:40', '2021-04-11 19:54:40'),
-(327, 'MATH 251', 'Differential Equations', 'ED2-AE', 108, 'LH/RM B', '2021-04-20', '12:15:00', '14:15:00', '2021-04-11 19:54:40', '2021-04-11 19:54:40');
-INSERT INTO `timetables` (`id`, `course_code`, `course_name`, `class`, `total_students`, `room`, `date`, `start_time`, `end_time`, `created_at`, `updated_at`) VALUES
+(327, 'MATH 251', 'Differential Equations', 'ED2-AE', 108, 'LH/RM B', '2021-04-20', '12:15:00', '14:15:00', '2021-04-11 19:54:40', '2021-04-11 19:54:40'),
 (328, 'MATH 251', 'Differential Equations', 'ED2-TEL', 109, 'N1/N2', '2021-04-20', '12:15:00', '14:15:00', '2021-04-11 19:54:40', '2021-04-11 19:54:40'),
 (329, 'MATH 353', 'Probability and Statistics', 'ED3-AERO', 46, 'FOSSB3', '2021-04-20', '16:00:00', '18:00:00', '2021-04-11 19:54:40', '2021-04-11 19:54:40'),
 (330, 'MATH 353', 'Probability and Statistics', 'ED3-ME', 167, 'FOSSB4/FOSSB3', '2021-04-20', '16:00:00', '18:00:00', '2021-04-11 19:54:40', '2021-04-11 19:54:40'),
@@ -515,22 +489,3 @@ INSERT INTO `timetables` (`id`, `course_code`, `course_name`, `class`, `total_st
 (484, 'TE 481', 'Wireless Data Comm. Net.', 'ED4-TEL', 78, 'PB001', '2021-04-23', '16:00:00', '18:00:00', '2021-04-11 19:54:40', '2021-04-11 19:54:40'),
 (485, 'PETE 455', 'Reservoir Simulation', 'ED4-PETE', 73, 'PB208', '2021-04-23', '16:00:00', '18:00:00', '2021-04-11 19:54:40', '2021-04-11 19:54:40'),
 (486, 'GE 451', 'Geodetic Surveying', 'ED4-GEOM', 115, 'VSLA', '2021-04-23', '16:00:00', '18:00:00', '2021-04-11 19:54:40', '2021-04-11 19:54:40');
-
---
--- Indexes for dumped tables
---
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `timetables`
---
-ALTER TABLE `timetables`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=487;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -16,14 +16,17 @@
                     <header class="widget-header">
                         <h4 class="widget-title">
                             ATTENDANCE SESSION
-                            @if (session('session_id'))
-                                @php
-                                    $activeSession = \App\Models\Timetable::find(session('session_id'));
-                                @endphp
-                                <strong>{{ $activeSession->course_code }} - {{ $activeSession->course_name }}
-                                    [{{ $activeSession->class }}] ({{ Helpers::coolTime($activeSession->start_time) }} -
-                                    {{ Helpers::coolTime($activeSession->end_time) }})</strong>
-                            @endif
+
+                            <span id="session-box">
+                                @if (session('session_id'))
+                                    @php
+                                        $activeSession = \App\Models\Timetable::find(session('session_id'));
+                                    @endphp
+                                    <strong>{{ $activeSession->course_code }} - {{ $activeSession->course_name }}
+                                        [{{ $activeSession->class }}] ({{ Helpers::coolTime($activeSession->start_time) }} -
+                                        {{ Helpers::coolTime($activeSession->end_time) }})</strong>
+                                @endif
+                            </span>
                         </h4>
                         <span class="pull-right">
                             <form action="{{ route('session.set') }}" method="post">
@@ -123,8 +126,7 @@
                                                                         <td>{{ $entry->student_no }}</td>
                                                                         <td>{{ @$student->surname }}
                                                                             {{ @$student->othernames }}</td>
-                                                                        <td>{{ $timetable->course_code }} -
-                                                                            {{ $timetable->course_name }}
+                                                                        <td>{{ $timetable->course_code }} - {{ $timetable->course_name }}
                                                                             [{{ $timetable->class }}]
                                                                             ({{ Helpers::coolTime($timetable->start_time) }}
                                                                             -
