@@ -4,9 +4,7 @@
     <section class="app-content">
         @php
             $i = 1;
-            $timetableEntries = \App\Models\Timetable::where('date', '>=', date('Y-m-d', strtotime(date('Y-m-d') . '-1 day')))
-                ->where('date', '<=', date('Y-m-d', strtotime(date('Y-m-d') . '+2 days')))
-                ->get();
+            $timetableEntries = \App\Models\Timetable::where('date', date('Y-m-d'))->get();
         @endphp
 
 

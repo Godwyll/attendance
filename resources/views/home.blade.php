@@ -8,8 +8,8 @@
             $i = 1;
             $entries = \App\Models\Entry::all();
             $timetables = \App\Models\Timetable::all();
-            $todaysEntries = \App\Models\Entry::where('created_at', Carbon\Carbon::today())->get();
-            $todaysSessions = \App\Models\Timetable::where('created_at', Carbon\Carbon::today())->get();
+            $todaysEntries = \App\Models\Entry::whereDate('created_at', Carbon\Carbon::today())->get();
+            $todaysSessions = \App\Models\Timetable::where('date', date('Y-m-d'))->get();
         @endphp
 
         <div class="row" id="cards">
