@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Timetable;
+use Session;
 
 class TimetableController extends Controller
 {
@@ -137,9 +138,11 @@ class TimetableController extends Controller
         $timetable = Timetable::destroy($id);
 
         if($timetable){
-            return redirect()->back()->with('success', 'Timetable Entry deleted Successfully.');
+            Session::flash('success', 'Timetable Entry deleted Successfully.');
+            return redirect()->back();
         }else{
-            return redirect()->back()->with('warning', 'Sorry, something went wrong.');
+            Session::flash('warning', 'Sorry, something went wrong.');
+            return redirect()->back();
         }
 
     }

@@ -8,7 +8,7 @@ $student = \App\Models\Student::where('student_no', $student_no)->first();
 
 {{-- @if (Helpers::isStudent($student_no)) --}}
 @if ($student_no)
-    <div class='alert alert-warning alert-custom alert-dismissible'><button type='button' class='close'
+    <div class='alert alert-success alert-custom alert-dismissible'><button type='button' class='close'
             data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
         <h5>Student with reference number <strong>{{ $student_no }}</strong> has been marked as present.</h5>
     </div>
@@ -57,7 +57,9 @@ $student = \App\Models\Student::where('student_no', $student_no)->first();
                                 {{ Helpers::coolTime($timetable->end_time) }})
                             </td>
                             <td>{{ Helpers::ago($entry->created_at) }}</td>
-                            <td></td>
+                            <td>
+                                <button role="button" data-toggle="modal" data-target="#delete-entry-modal" data-id="{{ $entry->id }}" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i></button>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

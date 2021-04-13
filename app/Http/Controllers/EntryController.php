@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Entry;
+use Session;
 use Helpers;
 use Auth;
 use Str;
@@ -97,7 +98,7 @@ class EntryController extends Controller
         $entry = Entry::destroy($id);
 
         if($entry){
-            Session::flash('success', 'Entryuration deleted Successfully.');
+            Session::flash('success', 'Attendance Entry deleted Successfully.');
             return redirect()->back();
         }else{
             Session::flash('warning', 'Sorry, something went wrong.');

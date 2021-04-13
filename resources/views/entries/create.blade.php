@@ -88,7 +88,6 @@
                                 <div class="col-offset-2">
                                     <div id="message-box">
                                         @php
-                                            $i = 1;
                                             $entries = \App\Models\Entry::orderBy('created_at', 'desc')
                                                 ->limit(10)
                                                 ->get();
@@ -102,43 +101,7 @@
                                                 </header><!-- .widget-header -->
                                                 <hr class="widget-separator">
                                                 <div class="widget-body">
-                                                    <div class="table-responsive">
-                                                        <table id="default-datatable" data-plugin="DataTable"
-                                                            class="table table-striped" cellspacing="0" width="100%">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>#</th>
-                                                                    <th>Student No.</th>
-                                                                    <th>Student Name</th>
-                                                                    <th>Session</th>
-                                                                    <th>Timestamp</th>
-                                                                    <th>Options</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                @foreach ($entries as $entry)
-                                                                    @php
-                                                                        $timetable = \App\Models\Timetable::find($entry->session_id);
-                                                                        $student = \App\Models\Student::where('student_no', $entry->student_no)->first();
-                                                                    @endphp
-                                                                    <tr>
-                                                                        <td>{{ $i++ }}</td>
-                                                                        <td>{{ $entry->student_no }}</td>
-                                                                        <td>{{ @$student->surname }}
-                                                                            {{ @$student->othernames }}</td>
-                                                                        <td>{{ $timetable->course_code }} - {{ $timetable->course_name }}
-                                                                            [{{ $timetable->class }}]
-                                                                            ({{ Helpers::coolTime($timetable->start_time) }}
-                                                                            -
-                                                                            {{ Helpers::coolTime($timetable->end_time) }})
-                                                                        </td>
-                                                                        <td>{{ Helpers::ago($entry->created_at) }}</td>
-                                                                        <td></td>
-                                                                    </tr>
-                                                                @endforeach
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
+                                                    @include('entries.list')
                                                 </div><!-- .widget-body -->
                                             </div><!-- .widget -->
                                         @endif

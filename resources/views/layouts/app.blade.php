@@ -172,7 +172,7 @@
         </li>
 
         <li>
-          <a href="{{ route('/') }}">
+          <a href="#">
             <i class="menu-icon zmdi zmdi-print zmdi-hc-lg"></i>
             <span class="menu-text">Reports</span>
           </a>
@@ -240,6 +240,24 @@
   <!-- /#app-footer -->
 </main>
 <!--========== END app main -->
+
+{{-- DELETE ATTENDANCE ENTRY MODAL --}}
+<div class="modal fade" id="delete-entry-modal" tabindex="-1" role="dialog" aria-labelledby="delete-entry-label" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+      <div class="panel panel-danger">
+          <div class="panel-heading">
+              <h4 class="panel-title" id="delete-entry-label">
+                  DELETE ATTENDANCE ENTRY
+                  <span role="button" class="pull-right" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </span>                    
+              </h4>
+          </div>
+          <div class="dynamic-content"></div>
+      </div>
+  </div><!-- END column -->  
+</div>
+
 
 <!-- build:js assets/js/core.min.js -->
 	<script src="{{ asset('libs/bower/jquery/dist/jquery.js') }}"></script>

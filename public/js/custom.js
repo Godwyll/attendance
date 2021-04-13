@@ -21,7 +21,29 @@ $("#attendance-form").submit(function (e) {
     });
 });
 
-// Create Attendance Entry Form
+// Delete Attendance Entry Modal
+$('#delete-entry-modal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var id = button.data('id'); // Extract info from data-* attributes
+    var data = 'id=' + id;
+
+    $.ajax({
+        type: "GET",
+        url: "/entries/" + id + "/delete",
+        data: data,
+        cache: false,
+        success: function (data) {
+            console.log(data);
+            $('.dynamic-content').html(data);
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+});
+
+
+// Set Attendance Session Form
 $("#set-session").submit(function (e) {
     e.preventDefault();
 
@@ -40,15 +62,15 @@ $("#set-session").submit(function (e) {
     });
 });
 
-// Edit Session Modal
-$('#edit-session-modal').on('show.bs.modal', function (event) {
+// Edit Timetable Entry Modal
+$('#edit-timetable-modal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
     var id = button.data('id'); // Extract info from data-* attributes
     var data = 'id=' + id;
 
     $.ajax({
         type: "GET",
-        url: "/sessions/" + id + "/edit",
+        url: "/timetables/" + id + "/edit",
         data: data,
         cache: false,
         success: function (data) {
@@ -61,15 +83,15 @@ $('#edit-session-modal').on('show.bs.modal', function (event) {
     });
 });
 
-// Delete Session Modal
-$('#delete-session-modal').on('show.bs.modal', function (event) {
+// Delete Timetable Entry Modal
+$('#delete-timetable-modal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
     var id = button.data('id'); // Extract info from data-* attributes
     var data = 'id=' + id;
 
     $.ajax({
         type: "GET",
-        url: "/sessions/" + id + "/delete",
+        url: "/timetables/" + id + "/delete",
         data: data,
         cache: false,
         success: function (data) {

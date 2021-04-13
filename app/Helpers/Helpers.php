@@ -131,15 +131,15 @@ class Helpers
     public static function getSession($timetable_id){
         if($timetable = \App\Models\Timetable::find($timetable_id)){
             switch ($timetable->start_time) {
-                case '08:30':
+                case '08:30:00':
                     $session = "1";
                     break;
                 
-                case '12:15':
+                case '12:15:00':
                     $session = "2";
                     break;
                 
-                case '16:00':
+                case '16:00:00':
                     $session = "3";
                     break;
                 

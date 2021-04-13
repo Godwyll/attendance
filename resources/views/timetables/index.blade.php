@@ -37,13 +37,13 @@
                                 @foreach ($timetables as $timetable)
                                     <tr>
                                         <td>{{ $i++ }}</td>
-                                        <td>{{ $timetable->id}}</td>
+                                        <td> Exams Session {{ Helpers::getSession($timetable->id)}}</td>
                                         <td>{{ $timetable->course_code}} - {{$timetable->course_name}}</td>
                                         <td>{{ $timetable->class }}/{{ $timetable->room }}</td>                                        
                                         <td>{{ Helpers::coolDate($timetable->date) }} ({{ Helpers::coolTime($timetable->start_time) }} - {{ Helpers::coolTime($timetable->end_time) }})</td>
                                         <td>
                                             <button role="button" data-toggle="modal" data-target="#edit-timetable-modal" data-id="{{ $timetable->id }}" class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></button>
-                                            <button role="button" data-toggle="modal" data-target="#delete-timetable-modal" data-id="{{ $timetable->id }}" class="btn btn-xs btn-dark"><i class="fa fa-trash-o"></i></button>
+                                            <button role="button" data-toggle="modal" data-target="#delete-timetable-modal" data-id="{{ $timetable->id }}" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i></button>
                                         </td>
                                     </tr>
                                 @endforeach
